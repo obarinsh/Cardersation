@@ -1,11 +1,8 @@
-// import { Link, useNavigate } from 'react-router-dom'
 import { useNavigate } from 'react-router-dom'
 import { AppDispatch } from '../store/store'
-
 import React from 'react'
 import { useState } from 'react'
 import { loginSuccess } from '../features/authSlice'
-// import { RootState, AppDispatch } from '../store/store'
 import { useDispatch } from 'react-redux'
 import NavBar from './NavBar'
 import '../css/login.css'
@@ -39,40 +36,44 @@ const LogIn = ({ user, isAuthenticated, onLogout }: { user: any, isAuthenticated
                     user: data.user,
                     accessToken: data.accessToken
                 }))
-                setSuccessMessage('Log in successful!')
+                setSuccessMessage('Welcome back!')
                 setTimeout(() => {
                     navigate('/categories')
                 }, 1000)
             } else {
-                setErrorMessage(data.message || 'Log in failed')
+                setErrorMessage(data.message || 'Unable to sign in')
             }
         } catch (error) {
-            setErrorMessage('Network error or server is down')
+            setErrorMessage('Connection error. Please try again.')
         }
         setIsSubmitting(false)
     }
+
     return (
         <div className="login-page">
             <NavBar user={user} isAuthenticated={isAuthenticated} onLogout={onLogout} />
             <div className="form-wrapper">
                 <form className="login-form" onSubmit={handleLogIn}>
+                    <h2>Welcome back</h2>
                     <input
                         type="email"
                         value={email}
                         onChange={e => setEmail(e.target.value)}
-                        placeholder="email"
+                        placeholder="Email"
                         required
                     />
                     <input
                         type="password"
                         value={password}
                         onChange={e => setPassword(e.target.value)}
-                        placeholder="password"
+                        placeholder="Password"
                         required
                     />
-                    <button type="submit" disabled={isSubmitting}>Sign In</button>
-                    {successMessage && <p>{successMessage}</p>}
-                    {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+                    <button type="submit" disabled={isSubmitting}>
+                        {isSubmitting ? 'Signing in...' : 'Sign In'}
+                    </button>
+                    {successMessage && <p style={{ color: 'var(--accent, #7A8B6E)' }}>{successMessage}</p>}
+                    {errorMessage && <p style={{ color: '#9B4D4D' }}>{errorMessage}</p>}
                 </form>
             </div>
         </div>

@@ -1,32 +1,32 @@
-// import React from 'react'
 import { useState, useEffect } from 'react'
 import { useNavigate } from 'react-router-dom'
+import { motion } from 'framer-motion'
 import { selectedCategory } from '../features/categSlice'
 import { useDispatch } from 'react-redux'
 import NavBar from './NavBar'
-
-// import { useDispatch, useSelector } from 'react-redux'
-// import HamburgerMenu from './HamburgerMenu'
-// import { Link } from 'react-router-dom'
-// import { RootState } from '../store/store'
 
 const MainMenu = ({ user, isAuthenticated, onLogout }: { user: any, isAuthenticated: boolean, onLogout: () => void }) => {
     const [decks, setDecks] = useState<any[]>([])
     const [filter, setFilter] = useState('all')
     const dispatch = useDispatch()
     const navigate = useNavigate()
-    // const isAuthenticated = useSelector((state: RootState) => state.auth.isAuthenticated)
-    // const user = useSelector((state: RootState) => state.auth.user)
+
+    const categories = [
+        { key: 'all', label: 'All' },
+        { key: 'Family & Home', label: 'Family' },
+        { key: 'Marriage & Partnership', label: 'Marriage' },
+        { key: 'Love & Relationships', label: 'Love' },
+        { key: 'Friends and Fun', label: 'Friends' },
+        { key: 'Self Reflection', label: 'Self' },
+    ]
 
     const filteredDecks = filter === 'all'
         ? decks
         : decks.filter(deck => deck.topic === filter)
 
-
     useEffect(() => {
         const fetchCategories = async () => {
             try {
-                // const response = await fetch('http://localhost:3001/api/categories')
                 const response = await fetch('/api/categories', {
                     credentials: 'include'
                 })
@@ -38,12 +38,10 @@ const MainMenu = ({ user, isAuthenticated, onLogout }: { user: any, isAuthentica
                 }
             } catch (error) {
                 console.error('Network error', error)
-
             }
         }
         fetchCategories()
     }, [])
-
 
     const handleSelect = (deck: any) => {
         if (!isAuthenticated) {
@@ -55,36 +53,48 @@ const MainMenu = ({ user, isAuthenticated, onLogout }: { user: any, isAuthentica
     }
 
     return (
-        <div>
+        <div style={{ minHeight: '100vh' }}>
             <NavBar user={user} isAuthenticated={isAuthenticated} onLogout={onLogout} />
             <div className='filter-header'>
-                <h1 style={{ fontSize: '30px', fontFamily: 'Playfair Display, sans-serif', textAlign: 'center' }}>What’s Your Deck Today?</h1>
-                <div className="filter-container">
-                    <div className="filter-menu">
-                        {['all', 'Family & Home', 'Marriage & Partnership', 'Love & Relationships', 'Friends and Fun', 'Self Reflection'].map(category => (
-                            <button className="filter-button" key={category} onClick={() => setFilter(category)}>
-                                {category.charAt(0).toUpperCase() + category.slice(1)}
-                            </button>
-                        ))}
-                    </div>
+                <h1>Choose your deck</h1>
+                <div className="filter-menu">
+                    {categories.map(cat => (
+                        <button 
+                            className={`filter-button ${filter === cat.key ? 'active' : ''}`}
+                            key={cat.key} 
+                            onClick={() => setFilter(cat.key)}
+                        >
+                            {cat.label}
+                        </button>
+                    ))}
                 </div>
             </div>
-            <div className="deck-container">
-                {filteredDecks.map(deck => (
-                    <div className={`deck-cover deck-${deck.id}`}
+            <motion.div 
+                className="deck-container"
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 0.4 }}
+            >
+                {filteredDecks.map((deck, index) => (
+                    <motion.div 
+                        className={`deck-cover deck-${deck.id}`}
                         key={deck.id}
-                        onClick={() => handleSelect(deck)}>
+                        onClick={() => handleSelect(deck)}
+                        initial={{ opacity: 0, y: 20 }}
+                        animate={{ opacity: 1, y: 0 }}
+                        transition={{ duration: 0.4, delay: index * 0.05 }}
+                    >
                         <div className="card-inner">
                             <div className={`card-front deck-${deck.id}`}>
                                 {deck.name}
                             </div>
                             <div className="card-back">
-                                <p style={{ fontFamily: 'Playfair Display, sans-serif' }}>{deck.description || 'Game rule or description goes here.'}</p>
+                                <p>{deck.description || 'Tap to begin'}</p>
                             </div>
                         </div>
-                    </div>
+                    </motion.div>
                 ))}
-            </div>
+            </motion.div>
         </div>
     )
 }

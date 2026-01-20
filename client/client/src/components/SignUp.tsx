@@ -1,4 +1,3 @@
-// import { Link } from 'react-router-dom'
 import { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import NavBar from './NavBar'
@@ -17,6 +16,8 @@ const SignUp = ({ user, isAuthenticated, onLogout }: { user: any, isAuthenticate
     const handleSignUp = async (e: React.FormEvent) => {
         e.preventDefault()
         setIsSubmitting(true)
+        setErrorMessage('')
+        setSuccessMessage('')
         try {
             const response = await fetch('/api/auth/signup', {
                 method: 'POST',
@@ -28,47 +29,49 @@ const SignUp = ({ user, isAuthenticated, onLogout }: { user: any, isAuthenticate
             })
             const data = await response.json()
             if (response.ok) {
-                setSuccessMessage('Signup successful!')
-                navigate('/signin')
+                setSuccessMessage('Account created! Redirecting...')
+                setTimeout(() => navigate('/signin'), 1500)
             } else {
-                setErrorMessage(`${data.error || 'Signup failed'}`)
+                setErrorMessage(`${data.error || 'Something went wrong'}`)
             }
         } catch (error) {
-            setErrorMessage('Network error or server is down')
+            setErrorMessage('Connection error. Please try again.')
         }
         setIsSubmitting(false)
-
     }
+
     return (
         <div className="signup-page">
             <NavBar user={user} isAuthenticated={isAuthenticated} onLogout={onLogout} />
             <div className="form-wrapper">
                 <form className="signup-form" onSubmit={handleSignUp}>
-                    <h2>Sign up</h2>
+                    <h2>Create your space</h2>
                     <input
                         type="text"
                         value={username}
                         onChange={e => setUsername(e.target.value)}
-                        placeholder="username"
+                        placeholder="Your name"
                         required
                     />
                     <input
                         type="email"
                         value={email}
                         onChange={e => setEmail(e.target.value)}
-                        placeholder="email"
+                        placeholder="Email"
                         required
                     />
                     <input
                         type="password"
                         value={password}
                         onChange={e => setPassword(e.target.value)}
-                        placeholder="password"
+                        placeholder="Password"
                         required
                     />
-                    <button type="submit" disabled={isSubmitting}>Register!</button>
-                    {successMessage && <p>{successMessage}</p>}
-                    {errorMessage && <p style={{ color: 'red' }}>{errorMessage}</p>}
+                    <button type="submit" disabled={isSubmitting}>
+                        {isSubmitting ? 'Creating...' : 'Create Account'}
+                    </button>
+                    {successMessage && <p style={{ color: 'var(--accent, #7A8B6E)' }}>{successMessage}</p>}
+                    {errorMessage && <p style={{ color: '#9B4D4D' }}>{errorMessage}</p>}
                 </form>
             </div>
         </div>

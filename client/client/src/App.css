@@ -1,145 +1,25 @@
+/* ===== DESIGN TOKENS ===== */
+:root {
+  --background: #F8F8F3;
+  --background-alt: #E8E6E0;
+  --text-primary: #2C2C2C;
+  --text-muted: #68635D;
+  --accent: #7A8B6E;
+  --accent-warm: #C4A77D;
+  --border: #D4D3C6;
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', 'Segoe UI', sans-serif;
+  --transition-slow: 300ms ease;
+  --transition-gentle: 500ms ease;
+}
+
 body {
   margin: 0;
-  background: linear-gradient(160deg, #a2cbee, #d4e6f8);
+  background: var(--background);
   min-height: 100vh;
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-  z-index: 0;
-}
-
-.linkButton {
-  padding: 5px;
-  border: 1px solid black;
-  border-radius: 4px;
-  margin: 8px;
-  text-decoration: none;
-}
-
-
-.controls {
-  position: absolute;
-  bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  z-index: 3;
-}
-
-.card .controls {
-  position: absolute;
-  bottom: 16px;
-  left: 50%;
-  transform: translateX(-50%);
-  display: flex;
-  flex-direction: column;
-  /* stack arrows & counter vertically */
-  align-items: center;
-}
-
-.controls .arrow-row {
-  display: flex;
-  gap: 12px;
-  z-index: 3;
-}
-
-.count-cards {
-  font-size: 0.9rem;
-  margin-top: 6px;
-  color: #555;
-  z-index: 3;
-}
-
-.arrow {
-  background: none;
-  border: none;
-  font-size: 1rem;
-  color: #333;
-  cursor: pointer;
-  opacity: 0.75;
-  transition: opacity 0.2s, transform 0.2s;
-  z-index: 3;
-}
-
-.arrow:hover {
-  opacity: 1;
-  transform: translateY(-2px) scale(1.1);
-}
-
-.hamburger-container {
-  position: relative;
-  margin: 10px;
-}
-
-.hamburger {
-  font-size: 34px;
-  background: none;
-  border: none;
-  cursor: pointer;
-  font-family: 'Playfair Display', serif;
-
-}
-
-.nav-links {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  width: 50px;
-  list-style: none;
-  margin: 0;
-  padding: 10px;
-  top: 40px;
-  right: 0;
-  background: white;
-  border-radius: 8px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  overflow: hidden;
-  transform: scaleY(0);
-  transform-origin: top;
-  transition: transform 0.3s ease;
-  opacity: 1;
-  pointer-events: auto;
-}
-
-
-
-.nav-links.show {
-  transform: scaleY(1);
-  opacity: 1;
-
-}
-
-.linkButton-hamburger {
-  text-decoration: none;
-  color: #333;
-  margin-bottom: 10px;
-}
-
-.linkButton-hamburger:hover {
-  background-color: #f0f0f0;
-}
-
-
-.deck-container {
-  max-width: 1800px;
-  margin: 0 auto;
-  display: flex;
-  flex-wrap: wrap;
-  gap: 40px;
-  align-items: center;
-  justify-content: center;
-  text-align: center
-}
-
-
-body {
-  background: #f2f2f2;
-}
-
-h1,
-h2,
-h3 {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  line-height: 1.6;
 }
 
 #root {
@@ -147,495 +27,285 @@ h3 {
   z-index: 1;
 }
 
-.deck-cover {
-  width: 250px;
-  height: 350px;
-  perspective: 1000px;
-  margin: 20px;
-  position: relative;
-  cursor: pointer;
-
-}
-
-.card-inner {
-  position: relative;
-  width: 100%;
-  height: 100%;
-  transition: transform 0.6s;
-  transform-style: preserve-3d;
-  cursor: pointer;
-
-}
-
-.deck-cover:hover .card-inner,
-.deck-cover:active .card-inner {
-  transform: rotateY(180deg);
-}
-
-.card-front,
-.card-back {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 16px;
-  backface-visibility: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-family: sans-serif;
-  font-size: 1.2rem;
-  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
-
-
-
-.card-back {
-  transform: rotateY(180deg);
-  padding: 20px;
-  text-align: left;
-  background-color: #e1e0d9;
-  background-size: cover;
-  background-blend-mode: overlay;
-  font-family: 'Playfair Display', serif;
-  font-size: 22px
-}
-
-.deck-cover:hover {
-  transform: translateY(-10px);
-}
-
-.deck-cover:hover .card-front,
-.deck-cover:hover .card-back {
-  box-shadow: 0 20px 30px rgba(0, 0, 0, 0.3);
-}
-
-.deck-cover::before,
-.deck-cover::after {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 16px;
-  background-image:
-    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 60%),
-    url('./img/paper4.avif');
-  background-size: cover;
-  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
-  top: 0;
-  left: 0;
-  z-index: -1;
-
-}
-
-.deck-cover::before {
-  transform: rotate(-3deg) translate(-10px, 8px);
-}
-
-.deck-cover::after {
-  transform: rotate(3deg) translate(10px, 8px);
-}
-
-.card-front.deck-1 {
-  background-image: url('./img/firstdate3.jpg');
-  background-size: cover;
-  color: #faf9f6;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.deck-cover.deck-1::after {
-  background-image:
-    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 60%),
-    url('./img/firstdate3.jpg');
-  background-size: cover;
-  background-position: center;
-}
-
-.deck-cover.deck-1::before {
-  background-image:
-    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 60%),
-    url('./img/firstdate3.jpg');
-  background-size: cover;
-  background-position: center;
-}
-
-.card-front.deck-2 {
-  background-image: url('./img/fam.jpg');
-  background-size: cover;
-  color: #fffffd;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.deck-cover.deck-2::after {
-  background-image:
-    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 60%),
-    url('./img/fam.jpg');
-  background-size: cover;
-  background-position: center;
-}
-
-.deck-cover.deck-2::before {
-  background-image:
-    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 60%),
-    url('./img/fam.jpg');
-  background-size: cover;
-  background-position: center;
-}
-
-.card-front.deck-3 {
-  background-image: url('./img/youtube1.jpg');
-  background-size: cover;
-  color: #ffffff;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.deck-cover.deck-3::after {
-  background-image:
-    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 60%),
-    url('./img/youtube1.jpg');
-  background-size: cover;
-  background-position: center;
-}
-
-.deck-cover.deck-3::before {
-  background-image:
-    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 60%),
-    url('./img/youtube1.jpg');
-  background-size: cover;
-  background-position: center;
-}
-
-.card-front.deck-4 {
-  background-image: url('./img/pregnancy.jpg');
-  background-size: cover;
-  color: #ffffff;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.deck-cover.deck-4::after {
-  background-image:
-    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 60%),
-    url('./img/pregnancy.jpg');
-  background-size: cover;
-  background-position: center;
-}
-
-.deck-cover.deck-4::before {
-  background-image:
-    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 60%),
-    url('./img/pregnancy.jpg');
-  background-size: cover;
-  background-position: center;
-}
-
-
-
-.card-front.deck-5 {
-  background-image: url('./img/mom1.jpg');
-  background-size: cover;
-  color: #fefdf8;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.deck-cover.deck-5::after {
-  background-image:
-    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 60%),
-    url('./img/mom1.jpg');
-  background-size: cover;
-  background-position: center;
-}
-
-.deck-cover.deck-5::before {
-  background-image:
-    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 60%),
-    url('./img/mom1.jpg');
-  background-size: cover;
-  background-position: center;
-}
-
-.card-front.deck-6 {
-  background-image: url('./img/wedding.jpg');
-  background-size: cover;
-  color: #fbfbfb;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.deck-cover.deck-6::after {
-  background-image:
-    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 60%),
-    url('./img/wedding.jpg');
-  background-size: cover;
-  background-position: center;
-}
-
-.deck-cover.deck-6::before {
-  background-image:
-    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 60%),
-    url('./img/wedding.jpg');
-  background-size: cover;
-  background-position: center;
-}
-
-.card-front.deck-7 {
-  background-image: url('./img/fun.jpg');
-  background-size: cover;
-  color: #fbfaf6;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.deck-cover.deck-7::after {
-  background-image:
-    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 60%),
-    url('./img/fun.jpg');
-  background-size: cover;
-  background-position: center;
-}
-
-.deck-cover.deck-7::before {
-  background-image:
-    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 60%),
-    url('./img/fun.jpg');
-  background-size: cover;
-  background-position: center;
-}
-
-
-.card-front.deck-8 {
-  background-image: url('./img/kids.jpg');
-  background-size: cover;
-  color: #ffffff;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.deck-cover.deck-8::after {
-  background-image:
-    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 60%),
-    url('./img/kids.jpg');
-  background-size: cover;
-  background-position: center;
-}
-
-.deck-cover.deck-8::before {
-  background-image:
-    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 60%),
-    url('./img/kids.jpg');
-  background-size: cover;
-  background-position: center;
-}
-
-.card-front.deck-9 {
-  background-image: url('./img/journaling.jpg');
-  background-size: cover;
-  color: #fbfbfb;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-.deck-cover.deck-9::after {
-  background-image:
-    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 60%),
-    url('./img/journaling.jpg');
-  background-size: cover;
-  background-position: center;
-}
-
-.deck-cover.deck-9::before {
-  background-image:
-    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 60%),
-    url('./img/journaling.jpg');
-  background-size: cover;
-  background-position: center;
-}
-
-.filter-header {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  gap: 10px;
-  margin-bottom: 20px;
-}
-
-
-.filter-button {
-  padding: 20px;
-}
-
-.ffilter-header button:hover {
-  background-color: #00f2fe;
-}
-
-.filter-header {
-  text-align: center;
-}
-
-
-.filter-menu {
-  display: flex;
-  gap: 12px;
-  flex-wrap: wrap;
-  justify-content: center;
-}
-
-.filter-button {
-  padding: 8px 16px;
-  background: var(--main-background-color, white);
-  color: var(--main-text-color, black);
-  border: 1px solid var(--main-outline-color, rgba(0, 0, 0, 0.15));
-  border-radius: 50px;
-  font-family: 'Raleway', sans-serif;
-  font-size: 0.9rem;
-  cursor: pointer;
-  transition: all 0.3s ease;
-}
-
-.filter-button:hover {
-  background: rgba(0, 0, 0, 0.05);
-  /* soft transparent background */
-  transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  transition: all 0.3s ease;
-}
-
-.filter-button.active {
-  background: var(--main-text-color, black);
-  color: var(--main-background-color, white);
-  border-color: var(--dense-outline-color, rgba(0, 0, 0, 0.5));
-}
-
-
-.instruction-container {
-  display: flex;
-  flex-direction: row;
-  align-items: top;
-  justify-content: center;
-  padding: 100px 20px;
-  gap: 10px;
-  flex-wrap: wrap;
-}
-
-.info-box {
-  width: 250px;
-  padding: 20px;
-}
-
-.info-box h2 {
-  font-size: 1.7rem;
-}
-
-
-.home-container {
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
 }
 
 .main-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 1rem 1rem;
-  background: white;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 1.25rem 2rem;
+  background: var(--background);
   position: sticky;
   top: 0;
   z-index: 1000;
+  border-bottom: 1px solid var(--border);
 }
 
 .header-left {
   display: flex;
   align-items: center;
+  gap: 1rem;
 }
 
 .header-right {
   display: flex;
   align-items: center;
+  gap: 1rem;
 }
 
 .auth-buttons {
   display: flex;
-  gap: 1rem;
+  gap: 0.75rem;
   align-items: center;
 }
 
 .auth-button {
-  padding: 0.5rem 1rem;
-  border: 1px solid #333;
-  border-radius: 4px;
+  padding: 0.5rem 1.25rem;
+  border: 1px solid var(--text-primary);
+  border-radius: 2rem;
   text-decoration: none;
-  color: #333;
+  color: var(--text-primary);
   background: transparent;
   cursor: pointer;
-  transition: all 0.3s ease;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  transition: all var(--transition-slow);
 }
 
 .auth-button:hover {
-  background: #333;
-  color: white;
+  background: var(--text-primary);
+  color: var(--background);
 }
 
-.main-content {
-  flex: 1;
-  padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  width: 100%;
+.hamburger-container { position: relative; }
+
+.hamburger {
+  font-size: 1.5rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  color: var(--text-primary);
+  padding: 0.5rem;
 }
 
-.welcome-text {
-  max-width: 800px;
-  margin: 2rem auto;
-  text-align: center;
-  line-height: 1.6;
+.nav-links {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  list-style: none;
+  margin: 0;
+  padding: 0.75rem;
+  background: var(--background);
+  border: 1px solid var(--border);
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+  transform: scaleY(0);
+  transform-origin: top;
+  transition: transform var(--transition-slow);
+  opacity: 0;
+  pointer-events: none;
 }
 
-
-@media (max-width: 768px) {
-  .main-header {
-    padding: 1rem;
-  }
-
-  .auth-buttons {
-    gap: 0.5rem;
-  }
-
-  .auth-button {
-    padding: 0.4rem 0.8rem;
-    font-size: 0.9rem;
-  }
-
-  .welcome-text {
-    display: none;
-  }
+.nav-links.show {
+  transform: scaleY(1);
+  opacity: 1;
+  pointer-events: auto;
 }
 
+.linkButton-hamburger {
+  display: block;
+  text-decoration: none;
+  color: var(--text-primary);
+  padding: 0.5rem 1rem;
+  border-radius: 0.25rem;
+  transition: background var(--transition-slow);
+}
 
-.game-container {
-  position: relative;
-  z-index: 2;
-  height: 100vh;
+.linkButton-hamburger:hover {
+  background: var(--background-alt);
+}
+
+.linkButton {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--text-primary);
+  border-radius: 0.25rem;
+  text-decoration: none;
+  color: var(--text-primary);
+  background: transparent;
+  cursor: pointer;
+  transition: all var(--transition-slow);
+}
+
+.linkButton:hover {
+  background: var(--text-primary);
+  color: var(--background);
+}
+
+.instruction-container {
   display: flex;
-  width: 100vw;
-
-  justify-content: center;
+  flex-direction: column;
   align-items: center;
-  overflow: hidden;
+  justify-content: center;
+  padding: 4rem 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
 }
 
-.footer-bottom {
-  margin-top: 20px;
-  background-color: #FFFFFF;
+.info-box {
+  padding: 2rem;
+  max-width: 500px;
+}
+
+.info-box h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
 }
 
 .home-text {
-  font-size: 20px;
-  font-family: 'Poppins, sans-serif';
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+.filter-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 3rem 1.5rem 2rem;
+  gap: 1.5rem;
+}
+
+.filter-header h1 {
+  font-size: 2rem;
+  text-align: center;
+  color: var(--text-primary);
+}
+
+.filter-menu {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.filter-button {
+  padding: 0.6rem 1.25rem;
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-radius: 2rem;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all var(--transition-slow);
+}
+
+.filter-button:hover {
+  border-color: var(--text-primary);
+  color: var(--text-primary);
+}
+
+.filter-button.active {
+  background: var(--text-primary);
+  color: var(--background);
+  border-color: var(--text-primary);
+}
+
+.deck-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.deck-cover {
+  width: 220px;
+  height: 320px;
+  perspective: 1000px;
+  cursor: pointer;
+  transition: transform var(--transition-slow);
+}
+
+.deck-cover:hover {
+  transform: translateY(-8px);
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s ease;
+  transform-style: preserve-3d;
+}
+
+.deck-cover:hover .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+}
+
+.card-front {
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.card-back {
+  transform: rotateY(180deg);
+  padding: 1.5rem;
+  text-align: center;
+  background: var(--background-alt);
+  color: var(--text-primary);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+.card-front.deck-1 { background-image: url('./img/firstdate3.jpg'); }
+.card-front.deck-2 { background-image: url('./img/fam.jpg'); }
+.card-front.deck-3 { background-image: url('./img/youtube1.jpg'); }
+.card-front.deck-4 { background-image: url('./img/pregnancy.jpg'); }
+.card-front.deck-5 { background-image: url('./img/mom1.jpg'); }
+.card-front.deck-6 { background-image: url('./img/wedding.jpg'); }
+.card-front.deck-7 { background-image: url('./img/fun.jpg'); }
+.card-front.deck-8 { background-image: url('./img/kids.jpg'); }
+.card-front.deck-9 { background-image: url('./img/journaling.jpg'); }
+
+.welcome-text {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+@media (max-width: 768px) {
+  .main-header { padding: 1rem; }
+  .auth-buttons { gap: 0.5rem; }
+  .auth-button { padding: 0.4rem 0.8rem; font-size: 0.85rem; }
+  .instruction-container { padding: 2rem 1rem; }
+  .deck-cover { width: 160px; height: 240px; }
+  .filter-header h1 { font-size: 1.5rem; }
 }
