@@ -1,0 +1,417 @@
+/* ===== DESIGN TOKENS ===== */
+:root {
+  --background: #F8F8F3;
+  --background-alt: #E8E6E0;
+  --text-primary: #2C2C2C;
+  --text-muted: #68635D;
+  --accent: #7A8B6E;
+  --accent-warm: #C4A77D;
+  --border: #D4D3C6;
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', 'Segoe UI', sans-serif;
+  --transition-slow: 300ms ease;
+  --transition-gentle: 500ms ease;
+}
+
+body {
+  margin: 0;
+  background: var(--background);
+  min-height: 100vh;
+  font-family: var(--font-body);
+  color: var(--text-primary);
+  line-height: 1.6;
+}
+
+#root {
+  position: relative;
+  z-index: 1;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-heading);
+  font-weight: 500;
+  letter-spacing: 0.02em;
+  line-height: 1.3;
+}
+
+.main-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.25rem 2rem;
+  background: var(--background);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-bottom: 1px solid var(--border);
+}
+
+.header-left {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.header-right {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+}
+
+.auth-button {
+  padding: 0.5rem 1.25rem;
+  border: 1px solid var(--text-primary);
+  border-radius: 2rem;
+  text-decoration: none;
+  color: var(--text-primary);
+  background: transparent;
+  cursor: pointer;
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  transition: all var(--transition-slow);
+}
+
+.auth-button:hover {
+  background: var(--text-primary);
+  color: var(--background);
+}
+
+.linkButton {
+  padding: 0.5rem 1rem;
+  border: 1px solid var(--text-primary);
+  border-radius: 0.25rem;
+  text-decoration: none;
+  color: var(--text-primary);
+  background: transparent;
+  cursor: pointer;
+  transition: all var(--transition-slow);
+}
+
+.linkButton:hover {
+  background: var(--text-primary);
+  color: var(--background);
+}
+
+.instruction-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4rem 2rem;
+  max-width: 600px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.info-box {
+  padding: 2rem;
+  max-width: 500px;
+}
+
+.info-box h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: var(--text-primary);
+}
+
+.home-text {
+  font-size: 1.1rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+}
+
+/* ===== FILTER HEADER & TITLE ROW ===== */
+.filter-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem 1.5rem;
+  gap: 1.5rem;
+}
+
+.filter-title-row {
+  position: relative;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.filter-title-row h1 {
+  margin: 0;
+  font-size: 2rem;
+  text-align: center;
+  color: var(--text-primary);
+}
+
+.filter-title-row .back-button {
+  position: absolute;
+  left: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+}
+
+.back-button-spacer {
+  display: none;
+}
+
+.filter-menu {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.filter-button {
+  padding: 0.6rem 1.25rem;
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+  border-radius: 2rem;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  cursor: pointer;
+  transition: all var(--transition-slow);
+}
+
+.filter-button:hover {
+  border-color: var(--text-primary);
+  color: var(--text-primary);
+}
+
+.filter-button.active {
+  background: var(--text-primary);
+  color: var(--background);
+  border-color: var(--text-primary);
+}
+
+/* ===== BACK BUTTON ===== */
+.back-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  background: none;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  cursor: pointer;
+  padding: 0.5rem 0;
+  transition: color var(--transition-slow);
+}
+
+.back-button:hover {
+  color: var(--text-primary);
+}
+
+/* ===== DECK CONTAINER ===== */
+.deck-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 3rem;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+/* ===== DECK CARDS WITH STACK EFFECT ===== */
+.deck-cover {
+  width: 220px;
+  height: 320px;
+  perspective: 1000px;
+  cursor: pointer;
+  position: relative;
+  isolation: isolate;
+  transition: transform 0.3s ease;
+}
+
+.deck-cover:hover {
+  transform: translateY(-8px);
+}
+
+.card-inner {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s ease;
+  transform-style: preserve-3d;
+  z-index: 3;
+}
+
+.deck-cover:hover .card-inner {
+  transform: rotateY(180deg);
+}
+
+.card-front, .card-back {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+  backface-visibility: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.card-front {
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+}
+
+.card-back {
+  transform: rotateY(180deg);
+  background-image: 
+    radial-gradient(circle at 30% 30%, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0) 60%),
+    url('./img/paper4.avif');
+  background-size: cover;
+  background-blend-mode: overlay;
+  background-color: #FDFCFA;
+  color: var(--text-primary);
+  font-size: 1rem;
+  line-height: 1.6;
+}
+
+/* Deck images */
+.card-front.deck-1 { background-image: url('./img/firstdate3.jpg'); }
+.card-front.deck-2 { background-image: url('./img/fam.jpg'); }
+.card-front.deck-3 { background-image: url('./img/youtube1.jpg'); }
+.card-front.deck-4 { background-image: url('./img/pregnancy.jpg'); }
+.card-front.deck-5 { background-image: url('./img/mom1.jpg'); }
+.card-front.deck-6 { background-image: url('./img/wedding.jpg'); }
+.card-front.deck-7 { background-image: url('./img/fun.jpg'); }
+.card-front.deck-8 { background-image: url('./img/children.jpg'); }
+.card-front.deck-9 { background-image: url('./img/journaling.jpg'); }
+
+/* Stacked cards behind */
+.deck-stack-card {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  border-radius: 1rem;
+  background-size: cover;
+  background-position: center;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+  transition: transform 0.3s ease;
+}
+
+.deck-stack-card.back-1 {
+  transform: rotate(-3deg) translate(-6px, 4px);
+  z-index: 1;
+  opacity: 0.7;
+}
+
+.deck-stack-card.back-2 {
+  transform: rotate(3deg) translate(6px, 4px);
+  z-index: 2;
+  opacity: 0.85;
+}
+
+.deck-cover:hover .deck-stack-card.back-1 {
+  transform: rotate(-5deg) translate(-10px, 6px);
+}
+
+.deck-cover:hover .deck-stack-card.back-2 {
+  transform: rotate(5deg) translate(10px, 6px);
+}
+
+/* Stack card images by deck */
+.deck-1 .deck-stack-card { background-image: url('./img/firstdate3.jpg'); }
+.deck-2 .deck-stack-card { background-image: url('./img/fam.jpg'); }
+.deck-3 .deck-stack-card { background-image: url('./img/youtube1.jpg'); }
+.deck-4 .deck-stack-card { background-image: url('./img/pregnancy.jpg'); }
+.deck-5 .deck-stack-card { background-image: url('./img/mom1.jpg'); }
+.deck-6 .deck-stack-card { background-image: url('./img/wedding.jpg'); }
+.deck-7 .deck-stack-card { background-image: url('./img/fun.jpg'); }
+.deck-8 .deck-stack-card { background-image: url('./img/children.jpg'); }
+.deck-9 .deck-stack-card { background-image: url('./img/journaling.jpg'); }
+
+.welcome-text {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* ===== RESPONSIVE ===== */
+@media (max-width: 768px) {
+  .main-header { padding: 1rem; }
+  .auth-buttons { gap: 0.5rem; }
+  .auth-button { padding: 0.4rem 0.8rem; font-size: 0.85rem; }
+  .instruction-container { padding: 2rem 1rem; }
+  .deck-cover { width: 160px; height: 240px; }
+  .filter-title-row h1 { font-size: 1.5rem; }
+  .deck-container { gap: 2rem; }
+  .filter-title-row .back-button { left: 1rem; }
+}
+
+/* Shuffle button */
+.shuffle-button {
+  position: absolute;
+  right: 2rem;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: 1px solid var(--border);
+  color: var(--text-muted);
+  font-size: 1.25rem;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  cursor: pointer;
+  transition: all var(--transition-slow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.shuffle-button:hover {
+  border-color: var(--text-primary);
+  color: var(--text-primary);
+  transform: translateY(-50%) rotate(180deg);
+}
+
+/* Better deck name visibility */
+.card-front {
+  background-size: cover;
+  background-position: center;
+  color: white;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 0, 0, 0.4);
+  font-size: 1.2rem;
+  font-weight: 500;
+  padding: 1.5rem;
+}
+
+.card-front::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.1) 50%, rgba(0, 0, 0, 0) 100%);
+  border-radius: 1rem;
+  pointer-events: none;
+}
+
+/* Categories page background */
+.filter-header,
+.deck-container {
+  background: var(--background-alt, #E8E6E0);
+}
+
+/* Deck 10 - Date Night */
+.card-front.deck-10 { background-image: url('./img/firstDate31.jpg'); }
+.deck-10 .deck-stack-card { background-image: url('./img/firstDate31.jpg'); }

@@ -1,0 +1,52 @@
+Cardersation
+
+How It Works
+This isn’t just another app — it’s an invitation to connect, laugh, and explore meaningful (and sometimes ridiculous!) conversations with the people you care about. All you need is one phone, one deck, and a little curiosity. Choose a deck, read the question out loud, and let the magic unfold.
+
+Why We Made This
+In a world filled with distractions, we wanted to create a simple tool to help people put down their screens and look each other in the eye. Whether it’s building intimacy with your partner, reconnecting with family, or friends, this game helps you create real moments.
+
+Who It’s For
+Couples looking for deeper connection, families wanting to share stories, friends ready for fun — this app is for anyone who wants to spend more quality time together. Play it at home, on a date night, at family dinners, or during road trips.
+
+How to Play
+Choose a deck. Take turns reading a question out loud. Be the first to share a song, a story, or an answer — or just let the conversation flow naturally. The only rule? Be present, have fun, and enjoy the moments you create together.
+
+
+## Features
+- Hamburger Menu: Drop down menu to go to Home/Decks pages
+- Carouselle of the decks examples 
+- Login/LogOut/SignUp buttons
+- Reversable decks
+- Filtration of the decks per category
+- Being able to go to the next/previous question
+
+## Tech Stack
+- Frontend: React, TypeScript, CSS,Redux
+- Backend: Node.js, PostgreSQL
+- Other: Vite, Neon
+
+##  Installation
+
+npm i
+nom run dev
+
+npm install dotenv bcrypt jwt pkg express pg jsonwebtoken cors bcrypt cookie-parser
+
+## Environment Variables
+ .env file
+
+
+## Project structure
+ /src
+  /client     # React frontend
+  /server     # Node backend
+
+## Reference
+
+/api/auth POST User sign in
+/api/game/1/name_of_the_deck GET  Get current game
+/signup POST register new user
+/signin POST login for existing users
+/logout POST logout for user
+/categories GET show all awailable categories

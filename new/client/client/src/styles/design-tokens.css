@@ -1,0 +1,12 @@
+:root {
+  --background: #F8F8F3;
+  --background-alt: #E8E6E0;
+  --text-primary: #2C2C2C;
+  --text-muted: #68635D;
+  --accent: #7A8B6E;
+  --accent-warm: #C4A77D;
+  --border: #D4D3C6;
+  --font-heading: 'Playfair Display', Georgia, serif;
+  --font-body: 'DM Sans', 'Segoe UI', sans-serif;
+  --transition-slow: 300ms ease;
+}
