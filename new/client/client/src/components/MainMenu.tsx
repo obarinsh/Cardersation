@@ -7,7 +7,7 @@ import NavBar from './NavBar'
 import Footer from './Footer'
 
 // Import images for Vite bundling
-import firstdate3 from '../img/firstdate3.jpg'
+import firstDate3 from '../img/firstDate3.jpg'
 import fam from '../img/fam.jpg'
 import youtube1 from '../img/youtube1.jpg'
 import pregnancy from '../img/pregnancy.jpg'
@@ -99,7 +99,7 @@ const MainMenu = ({ user, isAuthenticated, onLogout }: { user: any, isAuthentica
     }
 
     const deckImages: { [key: number]: string } = {
-        1: firstdate3,
+        1: firstDate3,
         2: fam,
         3: youtube1,
         4: pregnancy,
