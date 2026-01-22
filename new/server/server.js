@@ -39,13 +39,15 @@ app.use('/api/categories', categ_routes)
 app.use('/api/game', game_routes)
 app.use('/api/feedback', feedback_routes)
 
-// ✅ Serve static files from the React build directory
-app.use(express.static(path.join(__dirname, '../client/client/dist')))
-
-// ✅ Catch-all for React client routes
-app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, '../client/client/dist', 'index.html'))
-})
+// Only serve static files in development (production frontend is on Vercel)
+if (process.env.NODE_ENV !== 'production') {
+    app.use(express.static(path.join(__dirname, '../client/client/dist')))
+    
+    // Catch-all for React client routes
+    app.get('*', (req, res) => {
+        res.sendFile(path.join(__dirname, '../client/client/dist', 'index.html'))
+    })
+}
 
 const PORT = process.env.PORT || 3001
 
