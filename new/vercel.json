@@ -1,12 +1,15 @@
 {
-  "rewrites": [
+  "routes": [
     {
-      "source": "/api/:path*",
-      "destination": "https://cardersation-1.onrender.com/api/:path*"
+      "src": "^/api/(.*)$",
+      "dest": "https://cardersation-1.onrender.com/api/$1"
     },
     {
-      "source": "/(.*)",
-      "destination": "/"
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
     }
   ]
 }
