@@ -6,6 +6,18 @@ import { useDispatch } from 'react-redux'
 import NavBar from './NavBar'
 import Footer from './Footer'
 
+// Import images for Vite bundling
+import firstdate3 from '../img/firstdate3.jpg'
+import fam from '../img/fam.jpg'
+import youtube1 from '../img/youtube1.jpg'
+import pregnancy from '../img/pregnancy.jpg'
+import mom1 from '../img/mom1.jpg'
+import wedding from '../img/wedding.jpg'
+import fun from '../img/fun.jpg'
+import children from '../img/children.jpg'
+import journaling from '../img/journaling.jpg'
+import firstDate31 from '../img/firstDate31.jpg'
+
 const MainMenu = ({ user, isAuthenticated, onLogout }: { user: any, isAuthenticated: boolean, onLogout: () => void }) => {
     const [decks, setDecks] = useState<any[]>([])
     const [filter, setFilter] = useState('all')
@@ -87,16 +99,16 @@ const MainMenu = ({ user, isAuthenticated, onLogout }: { user: any, isAuthentica
     }
 
     const deckImages: { [key: number]: string } = {
-        1: '/src/img/firstdate3.jpg',
-        2: '/src/img/fam.jpg',
-        3: '/src/img/youtube1.jpg',
-        4: '/src/img/pregnancy.jpg',
-        5: '/src/img/mom1.jpg',
-        6: '/src/img/wedding.jpg',
-        7: '/src/img/fun.jpg',
-        8: '/src/img/children.jpg',
-        9: '/src/img/journaling.jpg',
-        10: '/src/img/firstDate31.jpg',
+        1: firstdate3,
+        2: fam,
+        3: youtube1,
+        4: pregnancy,
+        5: mom1,
+        6: wedding,
+        7: fun,
+        8: children,
+        9: journaling,
+        10: firstDate31,
     }
 
     return (
