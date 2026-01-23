@@ -17,7 +17,9 @@ const decks: Deck[] = [
     { id: 2, name: 'Family Time', description: 'Heartwarming questions to connect across generations.' },
     { id: 3, name: 'Unhinged Friends', description: 'Chaotic and hilarious questions for unforgettable nights.' },
     { id: 4, name: 'Self Reflection', description: 'Meaningful prompts for moments of personal insight.' },
-    { id: 5, name: 'Real Talk: Teens & Parents', description: 'Surprising conversations to bridge generations.' }
+    { id: 5, name: 'Real Talk: Teens & Parents', description: 'Surprising conversations to bridge generations.' },
+    { id: 6, name: 'Marriage & Partnership', description: 'Deepen your bond with thoughtful questions for couples.' },
+    { id: 7, name: 'First Date', description: 'Break the ice and get to know each other better.' },
 ];
 
 const Carousel = () => {

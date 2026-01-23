@@ -51,6 +51,8 @@
 .carousel-item.id-3 { background-image: url('../img/girlnight.jpg'); }
 .carousel-item.id-4 { background-image: url('../img/selfee.jpg'); }
 .carousel-item.id-5 { background-image: url('../img/kid.avif'); }
+.carousel-item.id-6 { background-image: url('../img/wedding.jpg'); }
+.carousel-item.id-7 { background-image: url('../img/firstDate3.jpg'); }
 
 .carousel-item:hover {
     transform: translateY(-8px);

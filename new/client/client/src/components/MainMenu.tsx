@@ -157,7 +157,10 @@ const MainMenu = ({ user, isAuthenticated, onLogout }: { user: any, isAuthentica
                             transition={{ duration: 0.4, delay: index * 0.05 }}
                         >
                             <div className="card-inner">
-                                <div className={`card-front deck-${deck.id}`}>
+                                <div 
+                                    className="card-front"
+                                    style={{ backgroundImage: deckImages[deck.id] ? `url(${deckImages[deck.id]})` : undefined }}
+                                >
                                     {deck.name}
                                 </div>
                                 <div className="card-back">
