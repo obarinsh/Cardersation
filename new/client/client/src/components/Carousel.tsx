@@ -1,6 +1,7 @@
 import '../css/carousel.css'
 import { Navigation, Autoplay } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import { useNavigate } from 'react-router-dom';
 import 'swiper/css'
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
@@ -20,6 +21,12 @@ const decks: Deck[] = [
 ];
 
 const Carousel = () => {
+    const navigate = useNavigate();
+
+    const handleClick = () => {
+        navigate('/categories');
+    };
+
     return (
         <div className="carousel-wrapper">
             <Swiper
@@ -43,7 +50,11 @@ const Carousel = () => {
             >
                 {decks.map((deck) => (
                     <SwiperSlide key={deck.id}>
-                        <div className={`carousel-item id-${deck.id}`}>
+                        <div 
+                            className={`carousel-item id-${deck.id}`}
+                            onClick={handleClick}
+                            style={{ cursor: 'pointer' }}
+                        >
                             <h3>{deck.name}</h3>
                             <p>{deck.description}</p>
                         </div>

@@ -21,6 +21,7 @@
   position: absolute;
   top: 0.5rem;
   left: 1rem;
+  z-index: 10;
 }
 
 .card-container {
@@ -53,12 +54,13 @@
   background-blend-mode: overlay;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
   font-family: 'Playfair Display', serif;
-  font-size: 22px;
+  font-size: 34px;
   margin: 0;
   box-sizing: border-box;
-  cursor: pointer;
+  cursor: grab;
   user-select: none;
   color: var(--text-primary, #2C2C2C);
+  touch-action: pan-y;
 }
 
 .card:hover {
@@ -68,6 +70,7 @@
 
 .card:active {
   transform: scale(0.99);
+  cursor: grabbing;
 }
 
 .card p {
@@ -150,29 +153,28 @@
   font-size: 1.5rem;
   font-weight: 500;
   color: var(--text-primary, #2C2C2C);
-  margin: 0 0 0.75rem 0;
+  margin: 0 0 0.5rem 0;
   text-align: center;
 }
 
-/* Mobile responsive */
+/* Tablet responsive */
 @media (max-width: 768px) {
   .game-page .page-container {
-    padding: 0.5rem;
+    padding: 0.75rem;
+    padding-top: 0.5rem;
   }
 
   .game-page .page-container .back-button {
-    top: 0.5rem;
-    left: 0.75rem;
     font-size: 0.85rem;
   }
 
   .card-container {
-    width: 85%;
-    max-width: 300px;
+    width: 90%;
+    max-width: 320px;
   }
 
   .card {
-    font-size: 18px;
+    font-size: 28px;
     padding: 20px;
   }
 
@@ -194,28 +196,52 @@
   }
 }
 
+/* Mobile responsive */
 @media (max-width: 480px) {
+  .game-page {
+    min-height: 100vh;
+    min-height: 100dvh;
+  }
+
+  .game-page .page-container {
+    padding: 0.5rem;
+    padding-top: 0.5rem;
+    padding-bottom: 0.5rem;
+  }
+
   .card-container {
-    width: 80%;
-    max-width: 260px;
+    width: 88%;
+    max-width: 280px;
   }
 
   .card {
-    font-size: 16px;
-    padding: 16px;
+    font-size: 24px;
+    padding: 18px;
   }
 
   .deck-title {
     font-size: 1.1rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .controls {
+    bottom: 10px;
   }
 }
 
-/* Swipeable card */
-.card {
-  cursor: grab;
-  touch-action: pan-y;
-}
+/* Very small screens */
+@media (max-width: 380px) {
+  .card-container {
+    width: 85%;
+    max-width: 260px;
+  }
 
-.card:active {
-  cursor: grabbing;
+  .card {
+    font-size: 20px;
+    padding: 16px;
+  }
+  
+  .deck-title {
+    font-size: 1rem;
+  }
 }

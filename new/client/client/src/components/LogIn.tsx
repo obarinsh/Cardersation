@@ -1,4 +1,4 @@
-import { useNavigate } from 'react-router-dom'
+import { useNavigate, Link } from 'react-router-dom'
 import { AppDispatch } from '../store/store'
 import React from 'react'
 import { useState } from 'react'
@@ -75,6 +75,10 @@ const LogIn = ({ user, isAuthenticated, onLogout }: { user: any, isAuthenticated
                     </button>
                     {successMessage && <p style={{ color: 'var(--accent, #7A8B6E)' }}>{successMessage}</p>}
                     {errorMessage && <p style={{ color: '#9B4D4D' }}>{errorMessage}</p>}
+                    <div className="signup-link">
+                        <span>Don't have an account?</span>
+                        <Link to="/signup" className="signup-button">Sign Up</Link>
+                    </div>
                 </form>
             </div>
             <Footer />

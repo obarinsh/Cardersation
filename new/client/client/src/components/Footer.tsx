@@ -3,7 +3,7 @@ const Footer = () => {
         <footer style={{
             width: '100%',
             padding: '0.75rem 1.5rem',
-            background: 'var(--background, #F8F8F3)',
+            background: '#F8F8F3',
             marginTop: 'auto',
             borderTop: '1px solid var(--border, #D4D3C6)',
             display: 'flex',

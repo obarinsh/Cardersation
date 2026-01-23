@@ -156,14 +156,6 @@ const MainMenu = ({ user, isAuthenticated, onLogout }: { user: any, isAuthentica
                             animate={{ opacity: 1, y: 0 }}
                             transition={{ duration: 0.4, delay: index * 0.05 }}
                         >
-                            <div 
-                                className="deck-stack-card back-1"
-                                style={{ backgroundImage: `url(${deckImages[deck.id] || deckImages[1]})` }}
-                            />
-                            <div 
-                                className="deck-stack-card back-2"
-                                style={{ backgroundImage: `url(${deckImages[deck.id] || deckImages[1]})` }}
-                            />
                             <div className="card-inner">
                                 <div className={`card-front deck-${deck.id}`}>
                                     {deck.name}

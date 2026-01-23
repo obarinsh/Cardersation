@@ -39,7 +39,7 @@ h1, h2, h3, h4, h5, h6 {
   justify-content: space-between;
   align-items: center;
   padding: 1.25rem 2rem;
-  background: var(--background);
+  background: #F8F8F3 !important;
   position: sticky;
   top: 0;
   z-index: 1000;
@@ -142,18 +142,20 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   justify-content: center;
   align-items: center;
+  min-height: 2.5rem;
 }
 
 .filter-title-row h1 {
   margin: 0;
-  font-size: 2rem;
+  font-size: clamp(1.1rem, 5vw, 2rem);
   text-align: center;
   color: var(--text-primary);
+  padding: 0 4rem;
 }
 
-.filter-title-row .back-button {
-  position: absolute;
-  left: 2rem;
+.filter-title-row > .back-button {
+  position: absolute !important;
+  left: 1rem;
   top: 50%;
   transform: translateY(-50%);
 }
@@ -264,9 +266,12 @@ h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-heading);
   font-size: 1.1rem;
   box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
-  overflow: hidden;
+  overflow: visible;
   padding: 1rem;
   box-sizing: border-box;
+  line-height: 1.2;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
 }
 
 .card-front {
@@ -285,8 +290,18 @@ h1, h2, h3, h4, h5, h6 {
   background-blend-mode: overlay;
   background-color: #FDFCFA;
   color: var(--text-primary);
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: clamp(0.7rem, 1.5vw + 0.4rem, 1rem);
+  line-height: 1.4;
+  overflow: hidden;
+}
+
+.card-back p {
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 8;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* Deck images */
@@ -300,48 +315,6 @@ h1, h2, h3, h4, h5, h6 {
 .card-front.deck-8 { background-image: url('./img/children.jpg'); }
 .card-front.deck-9 { background-image: url('./img/journaling.jpg'); }
 
-/* Stacked cards behind */
-.deck-stack-card {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 1rem;
-  background-size: cover;
-  background-position: center;
-  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-  transition: transform 0.3s ease;
-}
-
-.deck-stack-card.back-1 {
-  transform: rotate(-3deg) translate(-6px, 4px);
-  z-index: 1;
-  opacity: 0.7;
-}
-
-.deck-stack-card.back-2 {
-  transform: rotate(3deg) translate(6px, 4px);
-  z-index: 2;
-  opacity: 0.85;
-}
-
-.deck-cover:hover .deck-stack-card.back-1 {
-  transform: rotate(-5deg) translate(-10px, 6px);
-}
-
-.deck-cover:hover .deck-stack-card.back-2 {
-  transform: rotate(5deg) translate(10px, 6px);
-}
-
-/* Stack card images by deck */
-.deck-1 .deck-stack-card { background-image: url('./img/firstdate3.jpg'); }
-.deck-2 .deck-stack-card { background-image: url('./img/fam.jpg'); }
-.deck-3 .deck-stack-card { background-image: url('./img/youtube1.jpg'); }
-.deck-4 .deck-stack-card { background-image: url('./img/pregnancy.jpg'); }
-.deck-5 .deck-stack-card { background-image: url('./img/mom1.jpg'); }
-.deck-6 .deck-stack-card { background-image: url('./img/wedding.jpg'); }
-.deck-7 .deck-stack-card { background-image: url('./img/fun.jpg'); }
-.deck-8 .deck-stack-card { background-image: url('./img/children.jpg'); }
-.deck-9 .deck-stack-card { background-image: url('./img/journaling.jpg'); }
 
 .welcome-text {
   font-size: 0.9rem;
@@ -349,15 +322,76 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 /* ===== RESPONSIVE ===== */
+@media (max-width: 1024px) {
+  .deck-cover { width: 180px; height: 270px; }
+  .card-front {
+    font-size: 0.95rem;
+    padding: 0.75rem;
+  }
+  .card-back {
+    font-size: 0.85rem;
+    padding: 0.6rem;
+    line-height: 1.35;
+  }
+  .card-back p {
+    -webkit-line-clamp: 7;
+  }
+}
+
 @media (max-width: 768px) {
   .main-header { padding: 1rem; }
   .auth-buttons { gap: 0.5rem; }
   .auth-button { padding: 0.4rem 0.8rem; font-size: 0.85rem; }
   .instruction-container { padding: 2rem 1rem; }
   .deck-cover { width: 160px; height: 240px; }
-  .filter-title-row h1 { font-size: 1.5rem; }
+  .filter-title-row h1 { padding: 0 3.5rem; }
   .deck-container { gap: 2rem; }
-  .filter-title-row .back-button { left: 1rem; }
+  .filter-title-row > .back-button { left: 0.5rem; }
+  .card-front {
+    font-size: 0.85rem;
+    padding: 0.6rem;
+    line-height: 1.15;
+  }
+  .card-back {
+    font-size: 0.8rem;
+    padding: 0.5rem;
+    line-height: 1.3;
+  }
+  .card-back p {
+    -webkit-line-clamp: 6;
+  }
+}
+
+@media (max-width: 480px) {
+  .filter-header {
+    padding: 1.5rem 1rem;
+    gap: 1rem;
+  }
+  .filter-title-row > .back-button {
+    left: 0.25rem;
+    font-size: 0.85rem;
+  }
+  .shuffle-button {
+    right: 0.5rem;
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+  }
+  .deck-cover { width: 140px; height: 210px; }
+  .deck-container { gap: 1.5rem; padding: 1rem; }
+  .card-front {
+    font-size: 0.75rem;
+    padding: 0.5rem;
+    line-height: 1.1;
+  }
+  .card-back {
+    font-size: 0.75rem;
+    padding: 0.4rem;
+    line-height: 1.25;
+  }
+  .card-back p {
+    -webkit-line-clamp: 5;
+  }
 }
 
 /* Shuffle button */
@@ -392,9 +426,9 @@ h1, h2, h3, h4, h5, h6 {
   background-position: center;
   color: white;
   text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6), 0 0 20px rgba(0, 0, 0, 0.4);
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   font-weight: 500;
-  padding: 1.5rem;
+  padding: 1rem;
 }
 
 .card-front::after {
@@ -412,6 +446,12 @@ h1, h2, h3, h4, h5, h6 {
   background: var(--background-alt, #E8E6E0);
 }
 
+/* Force navbar and footer to cream background */
+header.main-header,
+.main-header,
+footer {
+  background: #F8F8F3 !important;
+}
+
 /* Deck 10 - Date Night */
 .card-front.deck-10 { background-image: url('./img/firstDate31.jpg'); }
-.deck-10 .deck-stack-card { background-image: url('./img/firstDate31.jpg'); }
