@@ -213,6 +213,26 @@ h1, h2, h3, h4, h5, h6 {
   color: var(--text-primary);
 }
 
+/* ===== LOADING CONTAINER ===== */
+.loading-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 300px;
+  width: 100%;
+  padding: 2rem;
+}
+
+.loading-container .loading {
+  font-size: 1rem;
+  text-align: center;
+  padding: 2rem;
+  background: rgba(255, 255, 255, 0.95);
+  border-radius: 1rem;
+  font-family: var(--font-body, 'DM Sans', sans-serif);
+  color: var(--text-muted, #68635D);
+}
+
 /* ===== DECK CONTAINER ===== */
 .deck-container {
   max-width: 1200px;

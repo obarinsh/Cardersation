@@ -21,6 +21,7 @@ import firstDate31 from '../img/firstDate31.jpg'
 const MainMenu = ({ user, isAuthenticated, onLogout }: { user: any, isAuthenticated: boolean, onLogout: () => void }) => {
     const [decks, setDecks] = useState<any[]>([])
     const [filter, setFilter] = useState('all')
+    const [isLoading, setIsLoading] = useState(true)
     const dispatch = useDispatch()
     const navigate = useNavigate()
 
@@ -72,6 +73,7 @@ const MainMenu = ({ user, isAuthenticated, onLogout }: { user: any, isAuthentica
 
     useEffect(() => {
         const fetchCategories = async () => {
+            setIsLoading(true)
             try {
                 const response = await fetch('/api/categories', {
                     credentials: 'include'
@@ -84,6 +86,8 @@ const MainMenu = ({ user, isAuthenticated, onLogout }: { user: any, isAuthentica
                 }
             } catch (error) {
                 console.error('Network error', error)
+            } finally {
+                setIsLoading(false)
             }
         }
         fetchCategories()
@@ -141,35 +145,41 @@ const MainMenu = ({ user, isAuthenticated, onLogout }: { user: any, isAuthentica
                         ))}
                     </div>
                 </div>
-                <motion.div 
-                    className="deck-container"
-                    initial={{ opacity: 0 }}
-                    animate={{ opacity: 1 }}
-                    transition={{ duration: 0.4 }}
-                >
-                    {filteredDecks.map((deck, index) => (
-                        <motion.div 
-                            className={`deck-cover deck-${deck.id}`}
-                            key={deck.id}
-                            onClick={() => handleSelect(deck)}
-                            initial={{ opacity: 0, y: 20 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ duration: 0.4, delay: index * 0.05 }}
-                        >
-                            <div className="card-inner">
-                                <div 
-                                    className="card-front"
-                                    style={{ backgroundImage: deckImages[deck.id] ? `url(${deckImages[deck.id]})` : undefined }}
-                                >
-                                    {deck.name}
+                {isLoading ? (
+                    <div className="loading-container">
+                        <div className="loading">Loading...</div>
+                    </div>
+                ) : (
+                    <motion.div 
+                        className="deck-container"
+                        initial={{ opacity: 0 }}
+                        animate={{ opacity: 1 }}
+                        transition={{ duration: 0.4 }}
+                    >
+                        {filteredDecks.map((deck, index) => (
+                            <motion.div 
+                                className={`deck-cover deck-${deck.id}`}
+                                key={deck.id}
+                                onClick={() => handleSelect(deck)}
+                                initial={{ opacity: 0, y: 20 }}
+                                animate={{ opacity: 1, y: 0 }}
+                                transition={{ duration: 0.4, delay: index * 0.05 }}
+                            >
+                                <div className="card-inner">
+                                    <div 
+                                        className="card-front"
+                                        style={{ backgroundImage: deckImages[deck.id] ? `url(${deckImages[deck.id]})` : undefined }}
+                                    >
+                                        {deck.name}
+                                    </div>
+                                    <div className="card-back">
+                                        <p>{deck.description || 'Tap to begin'}</p>
+                                    </div>
                                 </div>
-                                <div className="card-back">
-                                    <p>{deck.description || 'Tap to begin'}</p>
-                                </div>
-                            </div>
-                        </motion.div>
-                    ))}
-                </motion.div>
+                            </motion.div>
+                        ))}
+                    </motion.div>
+                )}
             </main>
             <Footer />
         </div>
